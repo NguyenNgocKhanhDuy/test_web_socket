@@ -8,6 +8,7 @@ function App() {
         WebSocketService.connect('ws://140.238.54.136:8080/chat/chat')
         WebSocketService.registerCallback('LOGIN', (data : any) => {
             console.log('Login response:', data);
+            handleMess()
         });
 
         WebSocketService.registerCallback('GET_PEOPLE_CHAT_MES', (data : any) => {
@@ -35,18 +36,20 @@ function App() {
                 }
             }
         });
+    }
 
-        // WebSocketService.sendMessage({
-        //
-        //     action: 'onchat',
-        //     data: {
-        //     event: 'GET_PEOPLE_CHAT_MES',
-        //         data: {
-        //         name: 'ti',
-        //         page:1
-        //         }
-        //     }
-        // })
+    const handleMess = () => {
+        WebSocketService.sendMessage({
+
+            action: 'onchat',
+            data: {
+                event: 'GET_PEOPLE_CHAT_MES',
+                data: {
+                    name: 'ti',
+                    page:1
+                }
+            }
+        })
     }
 
   return (
